@@ -1,3 +1,35 @@
 {
-  "extends": "@react-native/typescript-config/tsconfig.json"
+  "extends": "@react-native/typescript-config/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "jsx": "react-native",
+    "lib": ["es2017"],
+    "moduleResolution": "Bundler",
+    "noImplicitAny": false,
+    "noEmit": true,
+    "strict": true,
+    "target": "esnext",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["src/*"],
+      "@atoms/*": ["src/components/atoms/*"],
+      "@redux/*": ["src/redux/*"],
+      "@layouts/*": ["src/components/layouts/*"],
+      "@molecules/*": ["src/components/molecules/*"],
+      "@navigation/*": ["src/navigation/*"],
+      "@organisms/*": ["src/components/organisms/*"],
+      "@pages/*": ["src/pages/*"]
+    }
+  },
+  "include": ["**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": [
+    "node_modules",
+    "babel.config.js",
+    "metro.config.js",
+    "jest.config.js"
+  ]
 }

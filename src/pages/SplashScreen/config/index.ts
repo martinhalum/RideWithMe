@@ -1,0 +1,8 @@
+/**
+*
+* SplashScreen Config
+*
+*/
+
+
+
