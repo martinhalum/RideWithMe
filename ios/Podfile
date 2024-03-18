@@ -26,7 +26,14 @@ if linkage != nil
 end
 
 target 'RideWithMe' do
+  # React Native Maps dependencies
+  rn_maps_path = '../node_modules/react-native-maps'
+  pod 'react-native-google-maps', :path => rn_maps_path
+
   config = use_native_modules!
+
+  # Firebase
+  pod 'GoogleUtilities', :modular_headers => true
 
   use_react_native!(
     :path => config[:reactNativePath],
@@ -43,8 +50,13 @@ target 'RideWithMe' do
     inherit! :complete
     # Pods for testing
   end
+  
+  pre_install do |installer|
+    $RNMapboxMaps.pre_install(installer)
+  end
 
   post_install do |installer|
+    $RNMapboxMaps.post_install(installer)
     # https://github.com/facebook/react-native/blob/main/packages/react-native/scripts/react_native_pods.rb#L197-L202
     react_native_post_install(
       installer,
