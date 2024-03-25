@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "*": ["src/*"],
+      "@storage/*": ["src/storage/*"],
       "@atoms/*": ["src/components/atoms/*"],
       "@redux/*": ["src/redux/*"],
       "@layouts/*": ["src/components/layouts/*"],

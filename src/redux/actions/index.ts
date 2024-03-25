@@ -4,4 +4,4 @@ export {
   removeRide,
   setError,
   setLoading,
-} from './riderCreator';
+} from './riderActions';

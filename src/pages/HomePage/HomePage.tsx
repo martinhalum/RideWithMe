@@ -4,32 +4,42 @@
  *
  */
 
-import React, {useState, useEffect} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
-import {
-  MapView,
-  Camera,
-  UserTrackingMode,
-  LocationPuck,
-  Images,
-  Image,
-} from '@rnmapbox/maps';
-import Mapbox from '@rnmapbox/maps';
 import Geolocation from '@react-native-community/geolocation';
+import React, {useEffect, useState} from 'react';
+import {View} from 'react-native';
+import {useSelector} from 'react-redux';
 
-import HomePageConfig from './config';
+import HomePageLayout from '@layouts/HomePageLayout';
 
-import HomePageStyles from './styles';
-import type {PropsType} from './types';
+import {Coordinates, RideState} from '@redux/types';
 
-const styles = {matchParent: {flex: 1}};
-const HomePage = ({}: PropsType) => {
-  const [latitude, setLatitude] = useState(null);
-  const [longitude, setLongitude] = useState(null);
+import {LATITUDE_DELTA, LONGITUDE_DELTA} from './config';
 
-  Mapbox.setAccessToken(
-    'pk.eyJ1IjoibWhhbHVtMjYxNyIsImEiOiJjbHR3bjJteDgwMWFsMnJxd205OTRhNmh6In0.DZljmyv88MU_be0vXVR7qA',
+const HomePage = () => {
+  const [userRegion, setUserRegion] = useState<Coordinates | undefined>(
+    undefined,
   );
+  const [region, setRegion] = useState<Coordinates | undefined>(undefined);
+
+  const data = useSelector((state: RideState) => state.data);
+
+  const resetRegion = () => {
+    setRegion(userRegion);
+  };
+
+  const handleCardPress = (coords: Coordinates) => {
+    setRegion({
+      latitude: coords.latitude,
+      longitude: coords.longitude,
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
+    });
+  };
+
+  const handleRegionChange = (newRegion: Coordinates, isGesture?: boolean) => {
+    isGesture && setRegion(newRegion);
+  };
+
   useEffect(() => {
     Geolocation.getCurrentPosition(
       (position: {
@@ -38,51 +48,29 @@ const HomePage = ({}: PropsType) => {
           longitude: React.SetStateAction<null>;
         };
       }) => {
-        setLatitude(position.coords.latitude);
-        setLongitude(position.coords.longitude);
+        setUserRegion({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          latitudeDelta: 0.00145,
+          longitudeDelta: 0.0189,
+        });
       },
       (error: any) => console.log(error),
       {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
     );
   }, []);
+
   return (
-    <SafeAreaView style={styles.matchParent}>
-      <MapView style={styles.matchParent}>
-        <Images>
-          <Image name="topImage">
-            <View
-              style={{
-                borderColor: 'blue',
-                borderWidth: 2,
-                width: 16,
-                height: 16,
-                borderRadius: 8,
-                backgroundColor: 'red',
-              }}
-            />
-          </Image>
-        </Images>
-        <Camera
-          defaultSettings={{
-            centerCoordinate: [-77.036086, 38.910233],
-            zoomLevel: 14,
-          }}
-          followUserLocation={true}
-          followUserMode={UserTrackingMode.Follow}
-          followZoomLevel={14}
-        />
-        <LocationPuck
-          topImage="topImage"
-          visible={true}
-          scale={['interpolate', ['linear'], ['zoom'], 10, 1.0, 20, 4.0]}
-          pulsing={{
-            isEnabled: true,
-            color: 'teal',
-            radius: 50.0,
-          }}
-        />
-      </MapView>
-    </SafeAreaView>
+    <View>
+      <HomePageLayout
+        userRegion={userRegion}
+        region={region}
+        rides={data}
+        handleCardPress={handleCardPress}
+        resetRegion={resetRegion}
+        handleGestureChange={handleRegionChange}
+      />
+    </View>
   );
 };
 

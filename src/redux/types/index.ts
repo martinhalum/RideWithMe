@@ -1,16 +1,12 @@
+import React from 'react';
+
 // Ride Model
 export interface Ride {
   id: string;
   userId: string;
   driverId: string | null;
-  pickupLocation: {
-    latitude: number;
-    longitude: number;
-  };
-  destination: {
-    latitude: number;
-    longitude: number;
-  };
+  pickupLocation: Coordinates;
+  destination: Coordinates;
   status:
     | 'pending'
     | 'accepted'
@@ -22,9 +18,28 @@ export interface Ride {
   timestamp: Date;
 }
 
+export interface User {
+  id: string;
+  firstName: string;
+  lastName: string;
+  type: 'Passenger' | 'Rider';
+  plateNumber?: string;
+  vehicleType?: string;
+  vehicleBrand?: string;
+  vehicleModel?: string;
+}
+
+// Coordinates Model
+export interface Coordinates {
+  latitude: number | null | React.SetStateAction<null>;
+  longitude: number | null | React.SetStateAction<null>;
+  latitudeDelta: number;
+  longitudeDelta: number;
+}
+
 // Redux State
 export interface RideState {
-  rides: Ride[];
+  data: Ride[];
   error: string | null;
   loading: boolean;
 }

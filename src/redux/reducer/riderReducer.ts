@@ -2,9 +2,9 @@ import {RideAction, RideActionTypes, RideState} from '@redux/types';
 
 // Initial State
 const initialState: RideState = {
-  rides: [],
+  data: [],
   error: null,
-  loading: false,
+  loading: true,
 };
 
 // Reducer Function
@@ -16,19 +16,19 @@ const rideReducer = (
     case RideActionTypes.ADD_RIDE:
       return {
         ...state,
-        rides: [...state.rides, action.payload],
+        data: [...state.data, action.payload],
       };
     case RideActionTypes.UPDATE_RIDE:
       return {
         ...state,
-        rides: state.rides.map(ride =>
-          ride.id === action.payload.id ? action.payload : ride,
+        data: state.data.map(item =>
+          item.id === action.payload.id ? action.payload : item,
         ),
       };
     case RideActionTypes.REMOVE_RIDE:
       return {
         ...state,
-        rides: state.rides.filter(ride => ride.id !== action.payload),
+        data: state.data.filter(item => item.id !== action.payload),
       };
     case RideActionTypes.SET_ERROR:
       return {

@@ -1,4 +1,9 @@
-import {Ride, RideAction, RideActionTypes} from '../types/index';
+import {
+  Ride,
+  RideAction,
+  RideActionTypes,
+  SetLoadingAction,
+} from '../types/index';
 // Action Creators
 export const addRide = (ride: Ride): RideAction => ({
   type: RideActionTypes.ADD_RIDE,
@@ -20,7 +25,7 @@ export const setError = (error: string): RideAction => ({
   payload: error,
 });
 
-export const setLoading = (loading: boolean): RideAction => ({
+export const setLoading = (loading: boolean): SetLoadingAction => ({
   type: RideActionTypes.SET_LOADING,
   payload: loading,
 });

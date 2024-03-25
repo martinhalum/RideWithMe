@@ -6,20 +6,20 @@
  */
 
 import React from 'react';
-// import {Provider} from 'react-redux';
+import {Provider} from 'react-redux';
 
 import {NavigationContainer} from '@react-navigation/native';
 
 import AppNavigation from '@navigation/AppNavigation';
-// import store from '@redux/store';
+import store from '@redux/store';
 
 function App(): React.JSX.Element {
   return (
-    // <Provider store={store}>
-    <NavigationContainer>
-      <AppNavigation />
-    </NavigationContainer>
-    // </Provider>
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigation />
+      </NavigationContainer>
+    </Provider>
   );
 }
 

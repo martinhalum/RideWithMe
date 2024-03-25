@@ -11,6 +11,7 @@ module.exports = {
       {
         root: ['./src'],
         alias: {
+          '@storage': './src/storage',
           '@atoms': './src/components/atoms',
           '@redux': './src/redux',
           '@layouts': './src/components/layouts',

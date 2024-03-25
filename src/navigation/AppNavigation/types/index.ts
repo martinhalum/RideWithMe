@@ -1,4 +1,6 @@
+import {Ride} from '@redux/types';
+
 export type AppParamList = {
   AuthNav: undefined;
-  MainNav: undefined;
+  MainNav: {data: Ride[] | null | undefined};
 };
