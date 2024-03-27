@@ -18,26 +18,24 @@ const RideMap = ({
   handleGestureChange,
 }: PropsType) => {
   return (
-    <View>
-      {userRegion && (
-        <MapView
-          provider={PROVIDER_GOOGLE}
-          style={RideMapStyles.map}
-          region={region || userRegion}
-          onRegionChangeComplete={(newRegion, gesture) => {
-            handleGestureChange(newRegion, gesture.isGesture);
-          }}>
-          <Marker coordinate={userRegion} />
-          {rides.map((data, index) => (
-            <Marker
-              key={index}
-              coordinate={data.pickupLocation}
-              pinColor="blue"
-            />
-          ))}
-        </MapView>
-      )}
-    </View>
+    <>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={RideMapStyles.map}
+        region={region || userRegion}
+        onRegionChangeComplete={(newRegion, gesture) => {
+          handleGestureChange(newRegion, gesture.isGesture);
+        }}>
+        <Marker coordinate={userRegion} />
+        {rides.map((data, index) => (
+          <Marker
+            key={index}
+            coordinate={data.pickupLocation}
+            pinColor="blue"
+          />
+        ))}
+      </MapView>
+    </>
   );
 };
 

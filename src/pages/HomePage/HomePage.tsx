@@ -51,8 +51,8 @@ const HomePage = () => {
         setUserRegion({
           latitude: position.coords.latitude,
           longitude: position.coords.longitude,
-          latitudeDelta: 0.00145,
-          longitudeDelta: 0.0189,
+          latitudeDelta: LATITUDE_DELTA,
+          longitudeDelta: LONGITUDE_DELTA,
         });
       },
       (error: any) => console.log(error),

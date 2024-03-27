@@ -12,7 +12,7 @@ import RideMap from '@molecules/RideMap';
 import HomePageLayoutStyles from './styles';
 import type {PropsType} from './types';
 import ResetButton from '@atoms/ResetButton';
-import CardGroup from 'components/organisms/CardGroup';
+import CardGroup from '@organisms/CardGroup';
 
 const HomePageLayout = ({
   userRegion,

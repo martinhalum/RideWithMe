@@ -8,8 +8,8 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  [GMSServices provideAPIKey:@"AIzaSyCC0_J8MWs4uk2eS0JeKF-cK8yDlUi2CS8"]; // add this line using the api key obtained from Google Console
   [FIRApp configure];
-  [GMSServices provideAPIKey:@"AIzaSyBUbAxBnJaSK8gbZ7nyJKD52CerRO6Wuso"]; // add this line using the api key obtained from Google Console
   
   self.moduleName = @"RideWithMe";
   // You can add your custom initial props in the dictionary below.

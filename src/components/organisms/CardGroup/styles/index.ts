@@ -7,6 +7,14 @@
 import {StyleSheet} from 'react-native';
 
 const CardGroupStyles = StyleSheet.create({
+  cardContainer: {
+    position: 'absolute',
+    bottom: 30,
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    left: 10,
+  },
   card: {
     width: 300,
     height: 250,
